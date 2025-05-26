@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+    <section class="content">
+        <div class="box box-danger"> 
+            <div class="box-header with-border">
+                <center>
+                    <h3 class="box-title">Eliminar Empleado</h3>
+                </center>
+            </div>
+
+            <form class="form-horizontal" method="POST" action="/empleados/deleteempleado">
+                {% for row in data %}
+                <input type="hidden" name="id" value="{{ row[0] }}">  
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input value="{{ row[1] }}" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Apellido</label>
+                        <div class="col-sm-10">
+                            <input value="{{ row[2] }}" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input value="{{ row[3] }}" type="text" class="form-control" disabled>  <!-- Asumiendo que email es row[3] -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">DNI</label>
+                        <div class="col-sm-10">
+                            <input value="{{ row[4] }}" type="text" class="form-control" disabled>  <!-- Asumiendo que DNI es row[4] -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="box-footer">
+                    <a href="/empleados/"><button type="button" class="btn btn-default">Cancelar</button></a>
+                    <input name="delete" type="submit" class="btn btn-info pull-right" value="Delete">
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

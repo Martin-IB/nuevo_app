@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+    <section class="content">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <center>
+                    <h3 class="box-title">Actualizar Empleado</h3>
+                </center>
+            </div>
+
+            <form class="form-horizontal" method="POST" action="/empleados/updateempleado">
+                {% for row in data %}
+
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input name="nombre" value="{{ row[1] }}" type="text" class="form-control" placeholder="Nombre"
+                                autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Apellido</label>
+                        <div class="col-sm-10">
+                            <input name="apellido" value="{{ row[2] }}" type="text" class="form-control"
+                                placeholder="Apellido" autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input name="email" value="{{ row[3] }}" type="email" class="form-control"
+                                placeholder="Email" autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">DNI</label>
+                        <div class="col-sm-10">
+                            <input name="dni" value="{{ row[4] }}" type="text" class="form-control"
+                                placeholder="DNI" autocomplete="off" required pattern="\d{8}" title="Debe contener 8 dígitos">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <a href="/empleado/"><button type="button" class="btn btn-default">Cancel</button></a>
+                    <input name="update" type="submit" class="btn btn-info pull-right" value="Update">
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
