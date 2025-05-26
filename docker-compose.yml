@@ -1,14 +1,10 @@
 services:
   app:
-    build: ./src
+    build: ./app
     links:
       - db
     ports:
       - "5000:5000"
-
-
-
-      
 
   db:
     image: mysql:5.7
@@ -18,7 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database:/docker-entrypoint-initdb.d/:ro
+      - ./db:/docker-entrypoint-initdb.d/:ro
 
 volumes:
   mysql_data:
