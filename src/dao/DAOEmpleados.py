@@ -5,7 +5,7 @@ class DAOEmpleados:
         return pymysql.connect(host="localhost", user="root", password="", db="db_poo")
 
     def read(self, id):
-        con = DAOEmpleados.connect()
+        con = self.connect()
         cursor = con.cursor()
 
         try:
@@ -20,7 +20,7 @@ class DAOEmpleados:
             con.close()
 
     def insert(self, data):
-        con = DAOEmpleados.connect()
+        con = self.connect()
         cursor = con.cursor()
 
         try:
@@ -37,7 +37,7 @@ class DAOEmpleados:
             con.close()
 
     def update(self, id, data):
-        con = DAOEmpleados.connect()
+        con = self.connect()
         cursor = con.cursor()
 
         try:
@@ -54,7 +54,7 @@ class DAOEmpleados:
             con.close()
 
     def delete(self, id):
-        con = DAOEmpleados.connect()
+        con = self.connect()
         cursor = con.cursor()
 
         try:
