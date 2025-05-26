@@ -1,6 +1,6 @@
 services:
   app:
-    build: ./app
+    build: ./src
     links:
       - db
     ports:
