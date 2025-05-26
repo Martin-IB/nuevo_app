@@ -14,19 +14,16 @@ ruta_emp = '/empleados'
 def inicio():
     return render_template('index.html')
 
-@app.route(ruta+'/')
-@app.route('/usuario/')
-def index():
-    data = db.read(None)
 
+@app.route(ruta+'/')
+def usuario_index():
+    data = db.read(None)
     return render_template('usuario/index.html', data = data)
 
-@app.route(ruta+'/')
-@app.route('/empleados/')
-def index():
+@app.route(ruta_emp + '/')
+def empleado_index():
     data = db_emp.read(None)
-
-    return render_template('empleados/index.html', data = data)
+    return render_template('empleados/index.html', data=data)
 
 # ------------------ RUTAS USUARIO ------------------
 
@@ -42,16 +39,16 @@ def addusuario():
         else:
             flash("ERROR, al crear usuario")
 
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
 
 @app.route(ruta+'/update/<int:id>/')
 def update(id):
     data = db.read(id);
 
     if len(data) == 0:
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
     else:
         session['update'] = id
         return render_template('usuario/update.html', data = data)
@@ -67,16 +64,16 @@ def updateusuario():
 
         session.pop('update', None)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
 
 @app.route(ruta+'/delete/<int:id>/')
 def delete(id):
     data = db.read(id);
 
     if len(data) == 0:
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
     else:
         session['delete'] = id
         return render_template('usuario/delete.html', data = data)
@@ -91,9 +88,9 @@ def deleteusuario():
             flash('ERROR al eliminar')
         session.pop('delete', None)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('usuario_index'))
 
 # ------------------ RUTAS EMPLEADO ------------------
 
@@ -108,15 +105,15 @@ def addempleado():
             flash("Nuevo empleado creado")
         else:
             flash("ERROR al crear empleado")
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     
 @app.route(ruta_emp + '/update/<int:id>/')
 def empleado_update(id):
     data = db_emp.read(id)
     if len(data) == 0:
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     session['update_emp'] = id
     return render_template('empleados/update.html', data=data)
 
@@ -129,15 +126,15 @@ def updateempleado():
         else:
             flash('ERROR en actualizar empleado')
         session.pop('update_emp', None)
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
 
 @app.route(ruta_emp + '/delete/<int:id>/')
 def empleado_delete(id):
     data = db_emp.read(id)
     if len(data) == 0:
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     session['delete_emp'] = id
     return render_template('empleados/delete.html', data=data)
 
@@ -149,9 +146,9 @@ def deleteempleado():
         else:
             flash('ERROR al eliminar empleado')
         session.pop('delete_emp', None)
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('empleado_index'))
 #------------------------------------------------
 @app.errorhandler(404)
 def page_not_found(error):
