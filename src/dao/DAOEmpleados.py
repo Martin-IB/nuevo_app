@@ -2,7 +2,7 @@ import pymysql
 
 class DAOEmpleados:
     def connect(self):
-        return pymysql.connect(host="localhost", user="root", password="", db="db_poo")
+        return pymysql.connect(host="db", user="root", password="root", db="db_poo",port=3306)
 
     def read(self, id):
         con = self.connect()
